@@ -85,7 +85,7 @@ async def customs_assign(inter, random_first_pick:bool=False, lobby_id:int = 0 )
         await channel_message(team_aqua, aqua_chat, first_pick, lobby_id)
     
     # Followup on the command
-    return await inter.followup.send(f"**Assigned Magma to:** {"**,** ".join(magma_added)}\n**Assigned Aqua to:** {"**,** ".join(aqua_added)}")
+    return await inter.followup.send(f"**Assigned Magma to:** {", ".join(magma_added)}\n**Assigned Aqua to:** {", ".join(aqua_added)}")
 
 @bot.slash_command(description="Remove team roles")
 async def customs_remove(inter):
@@ -113,6 +113,6 @@ async def customs_remove(inter):
         await remove(team_aqua, aqua_removed)
 
     # Followup on the command
-    return await inter.followup.send(f"**Removed Magma from:** {"**,** ".join(magma_removed)}\n**Removed Aqua from:** {"**,** ".join(aqua_removed)}")
+    return await inter.followup.send(f"**Removed Magma from:** {", ".join(magma_removed)}\n**Removed Aqua from:** {", ".join(aqua_removed)}")
 
 bot.run(TOKEN)
