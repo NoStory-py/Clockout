@@ -22,7 +22,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Discord Bot
-        run: python "Roles Bot/main.py"
+        run: python "Roles bot/main.py"
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           MAGMA_CHANNEL_ID: ${{ secrets.MAGMA_CHAT }}
