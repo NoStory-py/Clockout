@@ -95,8 +95,8 @@ async def customs_remove(inter):
     await inter.response.defer()
 
     # Magma and Aqua roles
-    team_magma = disnake.utils.get(inter.guild.roles, id=1175474205815472209)
-    team_aqua = disnake.utils.get(inter.guild.roles, id=1175474391937712139)
+    team_magma = disnake.utils.get(inter.guild.roles, id=TEAM_MAGMA)
+    team_aqua = disnake.utils.get(inter.guild.roles, id=TEAM_AQUA)
 
     # Remove Magma and Aqua
     magma_removed = []
