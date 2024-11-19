@@ -1,4 +1,4 @@
-name: Run Discord Bot
+name: Run Roles Bot
 
 on:
   schedule:
@@ -24,7 +24,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Discord Bot
+      - name: Run Roles Bot
         run: python "Roles bot/main.py"
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
