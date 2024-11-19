@@ -2,13 +2,13 @@ name: Run Discord Bot
 
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '45 11 * * *'
   workflow_dispatch:
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 210
     
     steps:
       - name: Checkout code
