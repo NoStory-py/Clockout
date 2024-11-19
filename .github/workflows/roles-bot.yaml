@@ -28,6 +28,7 @@ jobs:
         run: python "Roles bot/main.py"
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CUSTOMS_CHANNEL_ID: ${{secrets.CUSTOMS_CHAT}}
           MAGMA_CHANNEL_ID: ${{ secrets.MAGMA_CHAT }}
           AQUA_CHANNEL_ID: ${{ secrets.AQUA_CHAT }}
           MAGMA_ROLE_ID: ${{ secrets.TEAM_MAGMA }}
