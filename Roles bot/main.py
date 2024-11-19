@@ -2,7 +2,7 @@ import os
 import disnake
 from disnake.ext import commands
 from random import choice
-from time import sleep
+from asyncio import sleep
 
 # environment variables
 TOKEN = os.getenv("BOT_TOKEN")
