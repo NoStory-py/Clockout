@@ -5,10 +5,12 @@ from random import choice
 
 # environment variables
 TOKEN = os.getenv("BOT_TOKEN")
+CUSTOMS_CHAT = int(os.getenv("CUSTOMS_CHANNEL_ID"))
 MAGMA_CHAT = int(os.getenv("MAGMA_CHANNEL_ID"))
 AQUA_CHAT = int(os.getenv("AQUA_CHANNEL_ID"))
 TEAM_MAGMA = int(os.getenv("MAGMA_ROLE_ID"))
 TEAM_AQUA = int(os.getenv("AQUA_ROLE_ID"))
+
 
 # idk something
 intents = disnake.Intents.default()
@@ -39,6 +41,7 @@ async def customs_assign(inter, random_first_pick:bool=False, lobby_id:int = 0 )
     # Magma and Aqua channels
     magma_chat = disnake.utils.get(inter.guild.channels, id=MAGMA_CHAT) 
     aqua_chat = disnake.utils.get(inter.guild.channels, id=AQUA_CHAT) 
+    customs_chat = disnake.utils.get(inter.guild.channels, id=CUSTOMS_CHAT)
     
     # Check for Red: , Blue: roles
     for x in inter.guild.roles:
@@ -64,29 +67,31 @@ async def customs_assign(inter, random_first_pick:bool=False, lobby_id:int = 0 )
     if check_blue:
         await assign(team_aqua, check_blue, aqua_added)
 
-    # channel message
-    if random_first_pick == True:
-        first_pick = choice([team_magma, team_aqua])
-    else:
-        first_pick = None
+    # Followup on the command
+    await inter.followup.send(f"**Assigned Magma to:** {"**,** ".join(magma_added)}\n**Assigned Aqua to:** {"**,** ".join(aqua_added)}")
 
-    async def channel_message(team, channel, first_pick, lobby_id):
-        if first_pick:
-            await channel.send(f"{team.mention} Private team chat!\n**First Pick: **{first_pick.mention}")
-        else:
-            await channel.send(f"{team.mention} Private team chat!")
+    # channel message
+    async def channel_message(team, channel, lobby_id):
         if lobby_id != 0:
-            await channel.send(f"# Lobby id: {lobby_id}")
+            await channel.send(f"{team.mention} Private team chat!\n# Lobby id: {lobby_id}")
             await channel.send(lobby_id)
+        else:
+            await channel.send(f"{team.mention} Private team chat!")  
 
     if magma_added:
-        await channel_message(team_magma, magma_chat, first_pick, lobby_id)
+        await channel_message(team_magma, magma_chat, lobby_id)
     if aqua_added:
-        await channel_message(team_aqua, aqua_chat, first_pick, lobby_id)
+        await channel_message(team_aqua, aqua_chat, lobby_id)
     
-    # Followup on the command
-    return await inter.followup.send(f"**Assigned Magma to:** {"**,** ".join(magma_added)}\n**Assigned Aqua to:** {"**,** ".join(aqua_added)}")
-
+    # first pick:
+    if random_first_pick == True:
+        teams = [team_magma, team_aqua]
+        first_pick = choice(teams)
+        sleep(25)
+        await customs_chat.send(f"# Selecting a random first pick...")
+        sleep(5)
+        await customs_chat.send(f"{first_pick.mention} is the first pick!\n||{teams[1].mention if first_pick == teams[0] else teams[0].mention} ^||")
+        
 @bot.slash_command(description="Remove team roles")
 async def customs_remove(inter):
 
