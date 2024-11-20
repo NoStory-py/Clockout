@@ -88,9 +88,9 @@ async def customs_assign(inter, random_first_pick:bool=False, lobby_id:int = 0 )
     if random_first_pick == True:
         teams = [team_magma, team_aqua]
         first_pick = choice(teams)
-        sleep(25)
+        await sleep(25)
         await customs_chat.send(f"# Selecting a random first pick...")
-        sleep(5)
+        await sleep(5)
         await customs_chat.send(f"{first_pick.mention} is the first pick!\n||{teams[1].mention if first_pick == teams[0] else teams[0].mention} ^||")
         
 @bot.slash_command(description="Remove team roles")
