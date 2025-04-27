@@ -31,7 +31,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Roles Bot
-        run: python "Roles bot/main.py"
+        run: python "roles_bot/main.py"
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           MONGO_URI: ${{ secrets.MONGO_URI }}
