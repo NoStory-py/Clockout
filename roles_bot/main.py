@@ -17,10 +17,6 @@ try:
 except ConnectionError as e:
     sys.exit("Database connection error")
 
-client = MongoClient(MONGO_URI)
-db = client["Guild"] 
-collection = db["data"]
-
 # idk something
 intents = disnake.Intents.default()
 intents.members = True
