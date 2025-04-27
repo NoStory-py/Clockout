@@ -1,14 +1,20 @@
 name: Run Roles Bot
 
 on:
-  # schedule:
-    # - cron: '45 11 * * *'
+  schedule:
+    - cron: '30 11 * * 5' 
+    - cron: '30 11 * * 6' 
+    - cron: '30 11 * * 0'  
   workflow_dispatch:
+
+concurrency:
+  group: roles-bot
+  cancel-in-progress: true
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 210
+    timeout-minutes: 240
     
     steps:
       - name: Checkout code
@@ -28,8 +34,4 @@ jobs:
         run: python "Roles bot/main.py"
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CUSTOMS_CHANNEL_ID: ${{secrets.CUSTOMS_CHAT}}
-          MAGMA_CHANNEL_ID: ${{ secrets.MAGMA_CHAT }}
-          AQUA_CHANNEL_ID: ${{ secrets.AQUA_CHAT }}
-          MAGMA_ROLE_ID: ${{ secrets.TEAM_MAGMA }}
-          AQUA_ROLE_ID: ${{ secrets.TEAM_AQUA }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
