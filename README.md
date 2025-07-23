@@ -31,3 +31,7 @@ This means the bot **won't work** without a compatible setup in your Discord ser
 ## Setup
 
 You are free to clone and run the project for learning or development purposes.
+- git clone https://github.com/NoStory-py/clockout.git
+- setup .env file containing TOKEN, MONGO_URI
+- pip install -r requirements.txt
+- python app.py
